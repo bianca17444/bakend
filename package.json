@@ -11,15 +11,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.1.2",
-      "onFail": "download"
-    }
-  },
   "type": "module",
-    "dependencies": {
+  "dependencies": {
     "@supabase/supabase-js": "^2.50.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
