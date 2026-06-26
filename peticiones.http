@@ -1,0 +1,47 @@
+@urlBase=http://localhost:3000
+
+@urlHealth={{urlBase}}/health
+@urlUsers={{urlBase}}/users
+
+###
+GET {{urlHealth}}
+
+###
+GET {{urlUsers}}
+
+###
+GET {{urlUsers}}/1
+
+###
+POST {{urlUsers}}
+Content-Type: application/json
+
+{
+  "name": "admin",
+  "email": "admin@example.com",
+  "password": "admin123",
+  "role": "alumno"
+}
+
+###
+POST {{urlUsers}}/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+
+###
+PUT {{urlUsers}}/1
+Content-Type: application/json
+
+{
+  "name": "nuevoAdmin",
+  "email": "nuevoadmin@example.com",
+  "password": "123456",
+  "role": "alumno"   
+}
+
+###
+DELETE {{urlUsers}}/1
