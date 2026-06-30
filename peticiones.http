@@ -1,47 +1,140 @@
 @urlBase=http://localhost:3000
+@urlVercel=https://backend-opal.vercel.app
 
 @urlHealth={{urlBase}}/health
 @urlUsers={{urlBase}}/users
+@urlMaterias={{urlBase}}/materias
+@urlCursan={{urlBase}}/cursan
+@urlDictan={{urlBase}}/dictan
+
+@urlUsersVercel={{urlVercel}}/users
+
+###########################################################
+# HEALTH
+###########################################################
 
 ###
 GET {{urlHealth}}
 
+###########################################################
+# USUARIOS
+###########################################################
+
 ###
+# Listar todos los usuarios
 GET {{urlUsers}}
 
 ###
-GET {{urlUsers}}/1
+# Listar un usuario
+GET {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
 
 ###
+# Crear usuario
 POST {{urlUsers}}
 Content-Type: application/json
 
 {
   "name": "admin",
-  "email": "admin@example.com",
+  "email": "adminnuevo@example.com",
   "password": "admin123",
   "role": "alumno"
 }
 
 ###
-POST {{urlUsers}}/login
+# Modificar usuario
+PUT {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
 Content-Type: application/json
 
 {
-  "email": "admin@example.com",
-  "password": "admin123"
-}
-
-###
-PUT {{urlUsers}}/1
-Content-Type: application/json
-
-{
-  "name": "nuevoAdmin",
+  "name": "Nuevo Admin",
   "email": "nuevoadmin@example.com",
   "password": "123456",
-  "role": "alumno"   
+  "role": "alumno"
 }
 
 ###
-DELETE {{urlUsers}}/1
+# Eliminar usuario
+DELETE {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
+
+###########################################################
+# MATERIAS
+###########################################################
+
+###
+# Listar todas las materias
+GET {{urlMaterias}}
+
+###
+# Listar una materia
+GET {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+
+###
+# Crear materia
+POST {{urlMaterias}}
+Content-Type: application/json
+
+{
+  "nombre": "Programación II",
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###
+# Modificar materia
+PUT {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+Content-Type: application/json
+
+{
+  "nombre": "Programación III",
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###
+# Eliminar materia
+DELETE {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+
+###########################################################
+# CURSAN
+###########################################################
+
+###
+# Listar inscripciones
+GET {{urlCursan}}
+
+###
+# Inscribir alumno en una materia
+POST {{urlCursan}}
+Content-Type: application/json
+
+{
+  "alumno_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81",
+  "materia_id": "f04b28f4-e146-4b25-8a6d-e144559b91e7"
+}
+
+###
+# Eliminar inscripción
+# ⚠️ Reemplazá UUID_INSCRIPCION por el id que devuelva GET /cursan
+DELETE {{urlCursan}}/UUID_INSCRIPCION
+
+###########################################################
+# DICTAN
+###########################################################
+
+###
+# Listar qué profesor dicta cada materia
+GET {{urlDictan}}
+
+###
+# Cambiar profesor de una materia
+PUT {{urlDictan}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+Content-Type: application/json
+
+{
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###########################################################
+# VERCEL
+###########################################################
+
+###
+GET {{urlUsersVercel}}

@@ -7,10 +7,25 @@
 //Router.delete('/users/:id', deleteUser(id));
 
 import { Router } from "express";
-import { createUser } from "../controllers/users.controller.js";
+
+import {
+  createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/users.controller.js";
 
 const router = Router();
 
+router.get("/", getUsers);
+
+router.get("/:id", getUserById);
+
 router.post("/", createUser);
+
+router.put("/:id", updateUser);
+
+router.delete("/:id", deleteUser);
 
 export default router;
