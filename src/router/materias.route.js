@@ -7,17 +7,25 @@ import {
   updateMateria,
   deleteMateria,
 } from "../controllers/materias.controller.js";
+import { verifyToken, requireRole } from "../security/auth.middleware.js";
+import { generalRateLimiter, writeRateLimiter, deleteRateLimiter } from "../security/rateLimit.middleware.js";
+import { validateMateria } from "../security/validation.middleware.js";
 
 const router = Router();
 
-router.get("/", getMaterias);
+// Consultar todas las materias (estudiantes y profesores autenticados)
+router.get("/", verifyToken, generalRateLimiter, getMaterias);
 
-router.get("/:id", getMateriaById);
+// Consultar una materia por ID (estudiantes y profesores autenticados)
+router.get("/:id", verifyToken, generalRateLimiter, getMateriaById);
 
-router.post("/", createMateria);
+// Crear materia (solo profesores y admins, con validación y límite de escritura)
+router.post("/", verifyToken, requireRole(["profesor", "admin"]), writeRateLimiter, validateMateria, createMateria);
 
-router.put("/:id", updateMateria);
+// Modificar materia (solo profesores y admins, con validación y límite de escritura)
+router.put("/:id", verifyToken, requireRole(["profesor", "admin"]), writeRateLimiter, validateMateria, updateMateria);
 
-router.delete("/:id", deleteMateria);
+// Eliminar materia (solo admins, con límite de eliminación)
+router.delete("/:id", verifyToken, requireRole(["admin"]), deleteRateLimiter, deleteMateria);
 
 export default router;

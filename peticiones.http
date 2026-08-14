@@ -1,5 +1,7 @@
+### Health
 @urlBase=http://localhost:3000
-@urlVercel=https://backend-opal.vercel.app
+@urlVercel=https://bakend-opal.vercel.app
+### Health
 
 @urlHealth={{urlBase}}/health
 @urlUsers={{urlBase}}/users
@@ -34,12 +36,22 @@ POST {{urlUsers}}
 Content-Type: application/json
 
 {
-  "name": "admin",
-  "email": "adminnuevo@example.com",
-  "password": "admin123",
+  "name": "bian",
+  "email": "bian@example.com",
+  "password": "Bian123@",
   "role": "alumno"
 }
 
+###
+# Login de usuario
+POST {{urlUsers}}/login
+Content-Type: application/json
+
+{
+  "email": "bian@example.com",
+  "password": "Bian123@"
+}
+            
 ###
 # Modificar usuario
 PUT {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
@@ -49,7 +61,7 @@ Content-Type: application/json
   "name": "Nuevo Admin",
   "email": "nuevoadmin@example.com",
   "password": "123456",
-  "role": "alumno"
+  "role": "profesor"
 }
 
 ###
@@ -66,12 +78,14 @@ GET {{urlMaterias}}
 
 ###
 # Listar una materia
-GET {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+GET {{urlMaterias}}
+// Authorization: Bearer {{token}}
 
 ###
 # Crear materia
 POST {{urlMaterias}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjNTdlZGM2LTNmZTgtNGJmYy1iYTBkLTJmNzA2YzcyMjdiMCIsInJvbCI6ImFsdW1ubyIsImlhdCI6MTc4Njc0NDYzMSwiZXhwIjoxNzg2NzUxODMxfQ.8ZoZpDYr4iSMvFviopzSBYS3eooJo6OAySp6_Fkv6zA
 
 {
   "nombre": "Programación II",

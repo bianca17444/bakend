@@ -125,3 +125,30 @@ export const deleteUserService = async (id) => {
 
   return result.rows[0];
 };
+
+// Iniciar sesión (login)
+export const loginUserService = async (email, password) => {
+  const result = await pool.query(
+    `
+    SELECT id, nombre, email, password, rol
+    FROM usuarios
+    WHERE email = $1
+    `,
+    [email]
+  );
+
+  if (result.rows.length === 0) {
+    throw new Error("Credenciales inválidas");
+  }
+
+  const user = result.rows[0];
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    throw new Error("Credenciales inválidas");
+  }
+
+  // Devolver el usuario sin la contraseña
+  const { password: _, ...userWithoutPassword } = user;
+  return userWithoutPassword;
+};
