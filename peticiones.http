@@ -1,0 +1,154 @@
+### Health
+@urlBase=http://localhost:3000
+@urlVercel=https://bakend-opal.vercel.app
+### Health
+
+@urlHealth={{urlBase}}/health
+@urlUsers={{urlBase}}/users
+@urlMaterias={{urlBase}}/materias
+@urlCursan={{urlBase}}/cursan
+@urlDictan={{urlBase}}/dictan
+
+@urlUsersVercel={{urlVercel}}/users
+
+###########################################################
+# HEALTH
+###########################################################
+
+###
+GET {{urlHealth}}
+
+###########################################################
+# USUARIOS
+###########################################################
+
+###
+# Listar todos los usuarios
+GET {{urlUsers}}
+
+###
+# Listar un usuario
+GET {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
+
+###
+# Crear usuario
+POST {{urlUsers}}
+Content-Type: application/json
+
+{
+  "name": "cris",
+  "email": "cris@example.com",
+  "password": "Cris123@",
+  "role": "profesor"
+}
+
+###
+# Login de usuario
+POST {{urlUsers}}/login
+Content-Type: application/json
+
+{
+  "email": "cris@example.com",
+  "password": "Cris123@"
+}
+            
+###
+# Modificar usuario
+PUT {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
+Content-Type: application/json
+
+{
+  "name": "Nuevo Admin",
+  "email": "nuevoadmin@example.com",
+  "password": "123456",
+  "role": "profesor"
+}
+
+###
+# Eliminar usuario
+DELETE {{urlUsers}}/d5365ea2-4dec-4bb2-89f0-b252eb231e81
+
+###########################################################
+# MATERIAS
+###########################################################
+
+###
+# Listar todas las materias
+GET {{urlMaterias}}
+
+###
+# Listar una materia
+GET {{urlMaterias}}
+// Authorization: Bearer {{token}}
+
+###
+# Crear materia
+POST {{urlMaterias}}
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjNTdlZGM2LTNmZTgtNGJmYy1iYTBkLTJmNzA2YzcyMjdiMCIsInJvbCI6ImFsdW1ubyIsImlhdCI6MTc4Njc0NDYzMSwiZXhwIjoxNzg2NzUxODMxfQ.8ZoZpDYr4iSMvFviopzSBYS3eooJo6OAySp6_Fkv6zA
+
+{
+  "nombre": "Programación II",
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###
+# Modificar materia
+PUT {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+Content-Type: application/json
+
+{
+  "nombre": "Programación III",
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###
+# Eliminar materia
+DELETE {{urlMaterias}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+
+###########################################################
+# CURSAN
+###########################################################
+
+###
+# Listar inscripciones
+GET {{urlCursan}}
+
+###
+# Inscribir alumno en una materia
+POST {{urlCursan}}
+Content-Type: application/json
+
+{
+  "alumno_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81",
+  "materia_id": "f04b28f4-e146-4b25-8a6d-e144559b91e7"
+}
+
+###
+# Eliminar inscripción
+# ⚠️ Reemplazá UUID_INSCRIPCION por el id que devuelva GET /cursan
+DELETE {{urlCursan}}/UUID_INSCRIPCION
+
+###########################################################
+# DICTAN
+###########################################################
+
+###
+# Listar qué profesor dicta cada materia
+GET {{urlDictan}}
+
+###
+# Cambiar profesor de una materia
+PUT {{urlDictan}}/f04b28f4-e146-4b25-8a6d-e144559b91e7
+Content-Type: application/json
+
+{
+  "profesor_id": "d5365ea2-4dec-4bb2-89f0-b252eb231e81"
+}
+
+###########################################################
+# VERCEL
+###########################################################
+
+###
+GET {{urlUsersVercel}}
